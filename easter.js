@@ -70,3 +70,18 @@ function Loader(name, ...args) {
 }
 
 // let loader = new Loader();
+
+//factory
+function EasterEgg(name, ...args) {
+  const loader = new Loader();
+  loader.load(name, ...args);
+  loader.whenFinishAnimation = function (name, ...args) {
+    switch (name) {
+      case "clock":
+        new Clock();
+        break;
+      default:
+        console.log("no existe ese easter egg");
+    }
+  };
+}
