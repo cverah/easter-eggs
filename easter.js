@@ -46,6 +46,41 @@ function Clock() {
 
 // const clock = new Clock();
 
+//Marquee
+function Marquee(word, longitud) {
+  const loader = new Loader(word, longitud);
+  loader.load(word, longitud);
+  loader.whenFinishAnimation = function (word, longitud) {
+    let text = word;
+    let inicio = 0;
+    let final = longitud;
+    this.travelText = () => {
+      if (inicio === text.length) {
+        clearInterval(this.interval);
+        console.log("finalizado marquee");
+      } else {
+        // a = "hola"
+        // a.slice(1) --> ola
+        console.log(text.slice(inicio));
+      }
+    };
+    this.run = () => {
+      this.interval = setInterval(() => {
+        console.clear();
+        if (final < inicio) {
+          console.clear();
+          inicio++;
+          this.travelText();
+        } else {
+          console.log(`${" ".repeat(final)}${text}`);
+          final--;
+        }
+      }, 200);
+    };
+    this.run();
+  };
+}
+
 //animacion
 function Loader(name, ...args) {
   let symbols = ["|", "/", "-", "\\"];
